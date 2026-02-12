@@ -68,13 +68,13 @@ export function ContactForm() {
                 </div>
               </a>
 
-              <a href="mailto:info@bsbuildersltd.co.uk" className="flex items-start gap-4 group">
+              <a href="mailto:bsbuildersltd@gmail.com" className="flex items-start gap-4 group">
                 <div className="w-11 h-11 rounded-lg bg-[#C8102E]/10 flex items-center justify-center shrink-0">
                   <Mail className="w-5 h-5 text-[#C8102E]" />
                 </div>
                 <div>
                   <span className="block text-[#1A1A1A] group-hover:text-[#C8102E] transition-colors" style={{ fontSize: "1rem", fontWeight: 600 }}>
-                    info@bsbuildersltd.co.uk
+                    bsbuildersltd@gmail.com
                   </span>
                   <span className="block text-[#6B7280]" style={{ fontSize: "0.8125rem" }}>
                     We aim to reply within 24 hours

@@ -7,7 +7,7 @@ const services = [
     description:
       "Create the space your family needs. From house extensions to loft and garage conversions, all our trades are in-house so we manage every detail from planning to handover.",
     image:
-      "https://images.unsplash.com/photo-1738464329211-c86c6164862e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBob3VzZSUyMGV4dGVuc2lvbiUyMGNvbnN0cnVjdGlvbiUyMFVLfGVufDF8fHx8MTc3MDcyMjI4MHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80&fit=crop",
     features: ["House extensions", "Loft conversions", "Garage conversions"],
   },
   {
@@ -15,7 +15,7 @@ const services = [
     description:
       "We supply and install high quality kitchens with a choice of laminate, glass and quartz worktops, plus bathroom suites and furniture to suit every budget.",
     image:
-      "https://images.unsplash.com/photo-1765371514650-1f99696ca69f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxraXRjaGVuJTIwcmVub3ZhdGlvbiUyMG1vZGVybiUyMGNvbXBsZXRlZHxlbnwxfHx8fDE3NzA3MjIyODB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      "https://images.unsplash.com/photo-1556909172-54557c7e4fb7?w=800&q=80&fit=crop",
     features: ["Full kitchen refits", "Bathroom suites", "Wet wall systems"],
   },
   {
@@ -23,7 +23,7 @@ const services = [
     description:
       "From groundworks to final fix, we build quality new homes. Our architect can visit to discuss the best design and produce the proper structural drawings for you.",
     image:
-      "https://images.unsplash.com/photo-1768321901790-684401480f45?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXNpZGVudGlhbCUyMGNvbnN0cnVjdGlvbiUyMHNpdGUlMjBicmlja3dvcmt8ZW58MXx8fHwxNzcwNzIyMjgxfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&q=80&fit=crop",
     features: ["Bespoke new builds", "Planning & design", "Building control standards"],
   },
   {
@@ -31,7 +31,7 @@ const services = [
     description:
       "Protect your biggest investment. From roof repairs and replacements to bespoke joinery, UPVC windows, UPVC doors and bi-fold door installations.",
     image:
-      "https://images.unsplash.com/photo-1673713637573-74e99609b2d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb25zZXJ2YXRvcnklMjBleHRlbnNpb24lMjBnbGFzcyUyMG1vZGVybnxlbnwxfHx8fDE3NzA3MjIyODd8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      "https://images.unsplash.com/photo-1513467535987-fd81bc7d62f8?w=800&q=80&fit=crop",
     features: ["Roofing", "UPVC windows & doors", "Bi-fold doors"],
   },
   {
@@ -39,7 +39,7 @@ const services = [
     description:
       "All trades carried out in-house by fully qualified and experienced tradesmen — plastering, tiling, electrical work, plumbing, real wood flooring, and a full painting and decorating service.",
     image:
-      "https://images.unsplash.com/photo-1649083048391-1c9e82472f65?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBob21lJTIwaW50ZXJpb3IlMjBvcGVuJTIwcGxhbiUyMGxpdmluZ3xlbnwxfHx8fDE3NzA3MjIyODJ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&q=80&fit=crop",
     features: ["Plastering & tiling", "Electrical & plumbing", "Painting & decorating"],
   },
   {
@@ -47,7 +47,7 @@ const services = [
     description:
       "Complete your home from the outside in. Extensive groundworks, alterations and improvements — we work on the outside as well as the inside, including mono-blocking and landscaping.",
     image:
-      "https://images.unsplash.com/photo-1765219711441-adfa44f35202?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnYXJkZW4lMjBsYW5kc2NhcGluZyUyMHBhdGlvJTIwZmluaXNoZWR8ZW58MXx8fHwxNzcwNzIyMjg0fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80&fit=crop",
     features: ["Mono-blocking", "Landscaping", "Groundworks & driveways"],
   },
 ];

@@ -23,9 +23,9 @@ export function Footer() {
                 <Phone className="w-4 h-4 text-[#C8102E]" />
                 <span style={{ fontSize: "0.875rem" }}>0141 880 5656</span>
               </a>
-              <a href="mailto:info@bsbuildersltd.co.uk" className="flex items-center gap-2 text-white/70 hover:text-white transition-colors">
+              <a href="mailto:bsbuildersltd@gmail.com" className="flex items-center gap-2 text-white/70 hover:text-white transition-colors">
                 <Mail className="w-4 h-4 text-[#C8102E]" />
-                <span style={{ fontSize: "0.875rem" }}>info@bsbuildersltd.co.uk</span>
+                <span style={{ fontSize: "0.875rem" }}>bsbuildersltd@gmail.com</span>
               </a>
               <div className="flex items-center gap-2 text-white/70">
                 <MapPin className="w-4 h-4 text-[#C8102E]" />

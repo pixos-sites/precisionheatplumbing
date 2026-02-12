@@ -68,7 +68,7 @@ export function Process() {
               <div key={step.title} className="relative">
                 {/* Connector line (desktop only) */}
                 {index < steps.length - 1 && (
-                  <div className="hidden lg:block absolute top-7 left-[calc(50%+2rem)] right-[-2rem] h-px bg-[#E0DDD9]" />
+                  <div className="hidden lg:block absolute top-7 left-[calc(50%+2rem)] w-[calc(100%-2rem)] h-px bg-[#E0DDD9]" />
                 )}
                 <div className="text-center">
                   <div className="relative inline-flex">
