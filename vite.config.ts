@@ -14,6 +14,9 @@ export default defineConfig({
     alias: {
       // Alias @ to the src directory
       '@': path.resolve(__dirname, './src'),
+      // Figma Make export for PolBuilt relies on react-router, but this template
+      // doesn't install it by default. Provide a local compatibility layer.
+      'react-router': path.resolve(__dirname, './src/vendor/react-router-shim.tsx'),
     },
   },
 

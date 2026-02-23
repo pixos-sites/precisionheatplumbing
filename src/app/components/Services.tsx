@@ -1,89 +1,40 @@
 import { ArrowRight } from "lucide-react";
+import type { BusinessPreset } from "@/config/template.types";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 
-const services = [
-  {
-    title: "Extensions & Conversions",
-    description:
-      "Create the space your family needs. From house extensions to loft and garage conversions, all our trades are in-house so we manage every detail from planning to handover.",
-    image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80&fit=crop",
-    features: ["House extensions", "Loft conversions", "Garage conversions"],
-  },
-  {
-    title: "Kitchens & Bathrooms",
-    description:
-      "We supply and install high quality kitchens with a choice of laminate, glass and quartz worktops, plus bathroom suites and furniture to suit every budget.",
-    image:
-      "https://images.unsplash.com/photo-1556909172-54557c7e4fb7?w=800&q=80&fit=crop",
-    features: ["Full kitchen refits", "Bathroom suites", "Wet wall systems"],
-  },
-  {
-    title: "New Builds",
-    description:
-      "From groundworks to final fix, we build quality new homes. Our architect can visit to discuss the best design and produce the proper structural drawings for you.",
-    image:
-      "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&q=80&fit=crop",
-    features: ["Bespoke new builds", "Planning & design", "Building control standards"],
-  },
-  {
-    title: "Roofing & Joinery",
-    description:
-      "Protect your biggest investment. From roof repairs and replacements to bespoke joinery, UPVC windows, UPVC doors and bi-fold door installations.",
-    image:
-      "https://images.unsplash.com/photo-1513467535987-fd81bc7d62f8?w=800&q=80&fit=crop",
-    features: ["Roofing", "UPVC windows & doors", "Bi-fold doors"],
-  },
-  {
-    title: "Interior Trades",
-    description:
-      "All trades carried out in-house by fully qualified and experienced tradesmen — plastering, tiling, electrical work, plumbing, real wood flooring, and a full painting and decorating service.",
-    image:
-      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&q=80&fit=crop",
-    features: ["Plastering & tiling", "Electrical & plumbing", "Painting & decorating"],
-  },
-  {
-    title: "Landscaping & Groundworks",
-    description:
-      "Complete your home from the outside in. Extensive groundworks, alterations and improvements — we work on the outside as well as the inside, including mono-blocking and landscaping.",
-    image:
-      "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80&fit=crop",
-    features: ["Mono-blocking", "Landscaping", "Groundworks & driveways"],
-  },
-];
+interface ServicesProps {
+  preset: BusinessPreset;
+}
 
-export function Services() {
+export function Services({ preset }: ServicesProps) {
   return (
     <section id="services" className="py-20 lg:py-28 bg-[#FAFAF8]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
         <div className="max-w-2xl mb-12 lg:mb-16">
           <span
-            className="text-[#C8102E] uppercase tracking-wider mb-3 block"
-            style={{ fontSize: "0.8125rem", fontWeight: 600 }}
+            className="uppercase tracking-wider mb-3 block"
+            style={{ fontSize: "0.8125rem", fontWeight: 600, color: "var(--brand-accent-ink)" }}
           >
-            What We Do
+            {preset.services.badge}
           </span>
           <h2
             className="text-[#1A1A1A] mb-4"
             style={{
-              fontFamily: "var(--font-serif)",
+              fontFamily: "var(--brand-heading-font)",
               fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)",
               fontWeight: 400,
               lineHeight: 1.2,
             }}
           >
-            Building services tailored to your home
+            {preset.services.title}
           </h2>
           <p className="text-[#6B7280]" style={{ fontSize: "1.0625rem", lineHeight: 1.7 }}>
-            All our work is guaranteed and carried out to the highest standard by fully qualified
-            and experienced tradesmen. All trades in-house — never sub-contracted.
+            {preset.services.description}
           </p>
         </div>
 
-        {/* Services Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {services.map((service) => (
+          {preset.services.items.map((service) => (
             <div
               key={service.title}
               className="group bg-white rounded-xl border border-border overflow-hidden hover:shadow-lg hover:shadow-black/5 transition-all duration-300"
@@ -111,17 +62,17 @@ export function Services() {
                 <ul className="space-y-1.5 mb-5">
                   {service.features.map((feature) => (
                     <li key={feature} className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 rounded-full bg-[#C8102E]" />
+                      <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "var(--brand-accent)" }} />
                       <span className="text-[#1A1A1A]" style={{ fontSize: "0.875rem" }}>{feature}</span>
                     </li>
                   ))}
                 </ul>
                 <a
                   href="#contact"
-                  className="inline-flex items-center gap-1.5 text-[#C8102E] group-hover:gap-2.5 transition-all"
-                  style={{ fontSize: "0.875rem", fontWeight: 600 }}
+                  className="inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-all"
+                  style={{ fontSize: "0.875rem", fontWeight: 600, color: "var(--brand-accent-ink)" }}
                 >
-                  Enquire now
+                  {preset.services.enquireLabel}
                   <ArrowRight className="w-4 h-4" />
                 </a>
               </div>

@@ -1,82 +1,89 @@
 import { ArrowRight, Phone } from "lucide-react";
+import type { BusinessPreset } from "@/config/template.types";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 
-export function Hero() {
+interface HeroProps {
+  preset: BusinessPreset;
+}
+
+export function Hero({ preset }: HeroProps) {
   return (
     <section className="relative min-h-[75vh] lg:min-h-[85vh] flex items-center pt-16 lg:pt-20">
-      {/* Background Image */}
       <div className="absolute inset-0">
         <ImageWithFallback
-          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=80&fit=crop"
-          alt="Modern home exterior"
+          src={preset.hero.backgroundImage}
+          alt={preset.hero.backgroundAlt}
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A1A]/90 via-[#1A1A1A]/70 to-[#1A1A1A]/40" />
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `linear-gradient(to right, ${preset.brand.heroOverlayStart}, ${preset.brand.heroOverlayMid}, ${preset.brand.heroOverlayEnd})`,
+          }}
+        />
       </div>
 
-      {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-12 lg:py-16">
         <div className="max-w-2xl">
-          {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 mb-5 lg:mb-6">
-            <div className="w-2 h-2 bg-[#C8102E] rounded-full" />
+            <div className="w-2 h-2 rounded-full" style={{ backgroundColor: "var(--brand-accent)" }} />
             <span className="text-white/90" style={{ fontSize: "0.8125rem", fontWeight: 500 }}>
-              Family-run builders for over 30 years
+              {preset.hero.badge}
             </span>
           </div>
 
-          {/* Headline */}
           <h1
             className="text-white mb-3 lg:mb-4"
             style={{
-              fontFamily: "var(--font-serif)",
+              fontFamily: "var(--brand-heading-font)",
               fontSize: "clamp(2rem, 5vw, 3.5rem)",
               fontWeight: 400,
               lineHeight: 1.15,
             }}
           >
-            Building homes you'll
+            {preset.hero.titleLine1}
             <br />
-            love to live in
+            {preset.hero.titleLine2}
           </h1>
 
-          {/* Subheadline */}
           <p
             className="text-white/80 mb-6 lg:mb-8 max-w-lg"
             style={{ fontSize: "clamp(1rem, 2vw, 1.25rem)", lineHeight: 1.6 }}
           >
-            Extensions, conversions, new builds and renovations across Scotland.
-            All trades in-house — no sub-contractors, just quality you can trust.
+            {preset.hero.description}
           </p>
 
-          {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-4">
             <a
-              href="#contact"
-              className="inline-flex items-center justify-center gap-2 bg-[#C8102E] text-white px-7 py-4 rounded-lg hover:bg-[#A30D25] transition-all hover:shadow-lg hover:shadow-[#C8102E]/20 group"
-              style={{ fontSize: "1rem", fontWeight: 600 }}
+              href={preset.hero.primaryCtaHref}
+              className="inline-flex items-center justify-center gap-2 text-white px-7 py-4 rounded-lg transition-all hover:shadow-lg group"
+              style={{
+                fontSize: "1rem",
+                fontWeight: 600,
+                backgroundColor: "var(--brand-accent)",
+                color: "var(--brand-accent-on)",
+              }}
             >
-              Get a Free Quote
+              {preset.hero.primaryCtaLabel}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </a>
             <a
-              href="#portfolio"
+              href={preset.hero.secondaryCtaHref}
               className="inline-flex items-center justify-center gap-2 bg-white/10 backdrop-blur-sm text-white border border-white/25 px-7 py-4 rounded-lg hover:bg-white/20 transition-all"
               style={{ fontSize: "1rem", fontWeight: 500 }}
             >
-              View Our Work
+              {preset.hero.secondaryCtaLabel}
             </a>
           </div>
 
-          {/* Quick contact */}
           <div className="mt-8 lg:mt-10 flex items-center gap-6 flex-wrap">
-            <a href="tel:01418805656" className="flex items-center gap-2 text-white/80 hover:text-white transition-colors">
+            <a href={preset.contact.phoneHref} className="flex items-center gap-2 text-white/80 hover:text-white transition-colors">
               <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
-                <Phone className="w-4 h-4 text-[#C8102E]" />
+                <Phone className="w-4 h-4" style={{ color: "var(--brand-accent)" }} />
               </div>
               <div>
-                <span className="block text-white/60" style={{ fontSize: "0.75rem" }}>Call us today</span>
-                <span className="block text-white" style={{ fontSize: "0.9375rem", fontWeight: 600 }}>0141 880 5656</span>
+                <span className="block text-white/60" style={{ fontSize: "0.75rem" }}>{preset.hero.callLabel}</span>
+                <span className="block text-white" style={{ fontSize: "0.9375rem", fontWeight: 600 }}>{preset.contact.phoneDisplay}</span>
               </div>
             </a>
             <div className="h-8 w-px bg-white/20 hidden sm:block" />
@@ -87,7 +94,7 @@ export function Hero() {
                 </svg>
               ))}
               <span className="text-white/70 ml-2" style={{ fontSize: "0.8125rem" }}>
-                4.6 rated on Google
+                {preset.hero.ratingLabel}
               </span>
             </div>
           </div>

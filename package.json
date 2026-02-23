@@ -5,7 +5,17 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
-    "dev": "vite"
+    "dev": "vite",
+    "dev:figma": "VITE_WORKFLOW_MODE=figma-led vite",
+    "dev:plumber": "VITE_PRESET=plumber vite",
+    "dev:electrician": "VITE_PRESET=electrician vite",
+    "dev:annieslandbuildersgroup": "VITE_PRESET=annieslandbuildersgroup vite",
+    "dev:polbuilt": "VITE_WORKFLOW_MODE=figma-led VITE_FIGMA_PROJECT=polbuilt vite",
+    "build:figma": "VITE_WORKFLOW_MODE=figma-led vite build",
+    "build:plumber": "VITE_PRESET=plumber vite build",
+    "build:electrician": "VITE_PRESET=electrician vite build",
+    "build:annieslandbuildersgroup": "VITE_PRESET=annieslandbuildersgroup vite build",
+    "build:polbuilt": "VITE_WORKFLOW_MODE=figma-led VITE_FIGMA_PROJECT=polbuilt vite build"
   },
   "dependencies": {
     "@emotion/react": "11.14.0",

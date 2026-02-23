@@ -1,43 +1,25 @@
-import { Award, MapPin, Shield, Clock } from "lucide-react";
+import type { BusinessPreset } from "@/config/template.types";
+import { iconMap } from "./iconMap";
 
-const trustItems = [
-  {
-    icon: Clock,
-    value: "30+",
-    label: "Years Experience",
-  },
-  {
-    icon: MapPin,
-    value: "Scotland",
-    label: "Wide Coverage",
-  },
-  {
-    icon: Shield,
-    value: "Fully",
-    label: "Insured & Guaranteed",
-  },
-  {
-    icon: Award,
-    value: "In-House",
-    label: "All Trades, No Subs",
-  },
-];
+interface TrustBarProps {
+  preset: BusinessPreset;
+}
 
-export function TrustBar() {
+export function TrustBar({ preset }: TrustBarProps) {
   return (
     <section className="relative z-20 -mt-12 lg:-mt-14 mb-[-3rem] lg:mb-[-3.5rem]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-white rounded-xl shadow-lg shadow-black/8 border border-border">
           <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-y lg:divide-y-0 divide-border">
-            {trustItems.map((item) => {
-              const Icon = item.icon;
+            {preset.trustBar.map((item) => {
+              const Icon = iconMap[item.icon];
               return (
-                <div
-                  key={item.label}
-                  className="flex items-center gap-4 p-5 lg:p-8"
-                >
-                  <div className="w-11 h-11 rounded-lg bg-[#C8102E]/10 flex items-center justify-center shrink-0">
-                    <Icon className="w-5 h-5 text-[#C8102E]" />
+                <div key={item.label} className="flex items-center gap-4 p-5 lg:p-8">
+                  <div
+                    className="w-11 h-11 rounded-lg flex items-center justify-center shrink-0"
+                    style={{ backgroundColor: "var(--brand-accent-soft)" }}
+                  >
+                    <Icon className="w-5 h-5" style={{ color: "var(--brand-accent-ink)" }} />
                   </div>
                   <div>
                     <span className="block text-[#1A1A1A]" style={{ fontSize: "1.25rem", fontWeight: 700, lineHeight: 1.2 }}>
