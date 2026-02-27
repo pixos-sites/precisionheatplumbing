@@ -81,7 +81,7 @@ export function ContactForm({ preset }: ContactFormProps) {
             </p>
 
             <div className="space-y-4 sm:space-y-5">
-              <a href={preset.contact.phoneHref} className="flex items-start gap-3 sm:gap-4 group">
+              <a href={preset.contact.phoneHref} className="flex items-center sm:items-start gap-3 sm:gap-4 group">
                 <div
                   className="w-11 h-11 rounded-lg flex items-center justify-center shrink-0"
                   style={{ backgroundColor: "var(--brand-accent-soft)" }}
@@ -101,7 +101,7 @@ export function ContactForm({ preset }: ContactFormProps) {
                 </div>
               </a>
 
-              <a href={preset.contact.emailHref} className="flex items-start gap-3 sm:gap-4 group">
+              <a href={preset.contact.emailHref} className="flex items-center sm:items-start gap-3 sm:gap-4 group">
                 <div
                   className="w-11 h-11 rounded-lg flex items-center justify-center shrink-0"
                   style={{ backgroundColor: "var(--brand-accent-soft)" }}
@@ -126,7 +126,7 @@ export function ContactForm({ preset }: ContactFormProps) {
                   href={whatsappHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-start gap-3 sm:gap-4 group"
+                  className="flex items-center sm:items-start gap-3 sm:gap-4 group"
                 >
                   <div
                     className="w-11 h-11 rounded-lg flex items-center justify-center shrink-0"
@@ -149,7 +149,7 @@ export function ContactForm({ preset }: ContactFormProps) {
                 </a>
               ) : null}
 
-              <div className="flex items-start gap-3 sm:gap-4">
+              <div className="flex items-center sm:items-start gap-3 sm:gap-4">
                 <div
                   className="w-11 h-11 rounded-lg flex items-center justify-center shrink-0"
                   style={{ backgroundColor: "var(--brand-accent-soft)" }}

@@ -22,6 +22,25 @@ Each entry should include:
 
 ### February 2026 — Codex
 
+**Mobile contact icon/text alignment + sticky CTA bottom-gap fix**
+
+- Updated contact info row alignment in `src/app/components/ContactForm.tsx`:
+  - phone/email/WhatsApp/location rows now use `items-center sm:items-start`
+  - fixes icon and label vertical alignment on mobile while preserving desktop two-line layout alignment
+- Updated `src/app/components/StickyCTA.tsx`:
+  - removed `paddingBottom: max(env(safe-area-inset-bottom), 0px)` from sticky CTA wrapper
+  - keeps CTA tight to the browser bottom bar when scrolling down (no white gap)
+  - retained `transform: translateZ(0)` for fixed-position stability
+- Verified build: `npm run build:precisionheatplumbing` (pass)
+
+**Why**
+
+- User reported misaligned contact labels/icons and a visible space between bottom CTA and mobile address bar during downward scroll.
+
+---
+
+### February 2026 — Codex
+
 **Follow-up mobile form + sticky CTA stability fix (Precision Heat Plumbing issue)**
 
 - Root cause identified: form controls in `ContactForm` were set to `0.9375rem` (15px), which can trigger iOS zoom on focus and cause post-blur sideways drag/jitter behavior.
