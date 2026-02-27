@@ -139,6 +139,15 @@
   html {
     font-size: var(--font-size);
     scroll-behavior: smooth;
+    max-width: 100%;
+    overflow-x: hidden;
+    overscroll-behavior-x: none;
+  }
+
+  body {
+    max-width: 100%;
+    overflow-x: hidden;
+    overscroll-behavior-x: none;
   }
 
   h1 {

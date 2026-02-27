@@ -22,6 +22,22 @@ Each entry should include:
 
 ### February 2026 — Codex
 
+**Fixed mobile horizontal page drift after form blur/focus interactions**
+
+- Updated global base styles in `src/styles/theme.css` to prevent horizontal overscroll:
+  - `html`: `max-width: 100%`, `overflow-x: hidden`, `overscroll-behavior-x: none`
+  - `body`: `max-width: 100%`, `overflow-x: hidden`, `overscroll-behavior-x: none`
+- Verified with preset build: `npm run build:precisionheatplumbing` (pass)
+
+**Why**
+
+- On mobile, after tapping form fields and then tapping away, pages could become draggable side-to-side.
+- Locking horizontal overflow at root level prevents that poor UX across preset sites.
+
+---
+
+### February 2026 — Codex
+
 **Added Figma batch clone script + batch-safe Figma template refinements**
 
 - Added `scripts/figma-batch-clone.mjs` to generate multiple Figma-import client folders from one JSON file + one refined base folder
