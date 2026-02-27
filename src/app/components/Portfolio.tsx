@@ -53,8 +53,8 @@ export function Portfolio({ preset }: PortfolioProps) {
               style={{
                 fontSize: "0.8125rem",
                 fontWeight: 500,
-                backgroundColor: activeCategory === category ? "#1A1A1A" : undefined,
-                borderColor: activeCategory === category ? "#1A1A1A" : undefined,
+                backgroundColor: activeCategory === category ? "var(--brand-accent)" : undefined,
+                borderColor: activeCategory === category ? "var(--brand-accent)" : undefined,
               }}
             >
               {category}
