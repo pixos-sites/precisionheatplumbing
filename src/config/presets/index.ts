@@ -13,4 +13,4 @@ export const presets: Record<string, BusinessPreset> = {
   precisionheatplumbing: precisionheatplumbingPreset,
 };
 
-export const defaultPreset = plumberPreset;
+export const defaultPreset = precisionheatplumbingPreset;

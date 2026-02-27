@@ -4,8 +4,8 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "build": "vite build",
-    "dev": "vite",
+    "build": "VITE_PRESET=precisionheatplumbing vite build",
+    "dev": "VITE_PRESET=precisionheatplumbing vite",
     "dev:figma": "VITE_WORKFLOW_MODE=figma-led vite",
     "dev:plumber": "VITE_PRESET=plumber vite",
     "dev:electrician": "VITE_PRESET=electrician vite",
