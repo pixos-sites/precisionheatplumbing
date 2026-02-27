@@ -25,6 +25,23 @@ export const plumberPreset: BusinessPreset = {
     serviceAreaLine: "Serving Greater London and nearby boroughs",
     openingHours: "Mon-Fri, 7am-7pm",
   },
+  enhancements: {
+    whatsapp: {
+      phoneNumber: "+442079461001",
+      prefillMessage: "Hi FlowFix, I would like a quote for plumbing work in London.",
+      buttonLabel: "Chat on WhatsApp",
+      stickyLabel: "WhatsApp",
+    },
+    reviews: {
+      url: "https://www.google.com/search?q=FlowFix+Plumbing+London+reviews",
+      label: "See our Google reviews",
+    },
+    map: {
+      embedUrl:
+        "https://www.google.com/maps?q=London%2C%20England&z=10&output=embed",
+      title: "FlowFix Plumbing service area map",
+    },
+  },
   nav: {
     links: [
       { label: "Services", href: "#services" },

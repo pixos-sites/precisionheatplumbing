@@ -25,6 +25,7 @@ export default function App() {
         ["--brand-accent-on" as string]: preset.brand.accentOnAccent ?? "#FFFFFF",
         ["--brand-body-font" as string]: preset.brand.fontBody,
         ["--brand-heading-font" as string]: preset.brand.fontHeading,
+        ["--brand-heading-weight" as string]: 700,
       }}
     >
       <Navbar preset={preset} />

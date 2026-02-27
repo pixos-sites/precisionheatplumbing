@@ -7,7 +7,7 @@ interface TrustBarProps {
 
 export function TrustBar({ preset }: TrustBarProps) {
   return (
-    <section className="relative z-20 -mt-12 lg:-mt-14 mb-[-3rem] lg:mb-[-3.5rem]">
+    <section className="relative z-20 -mt-20 lg:-mt-14 mb-[-2rem] lg:mb-[-3.5rem]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-white rounded-xl shadow-lg shadow-black/8 border border-border">
           <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-y lg:divide-y-0 divide-border">

@@ -28,6 +28,7 @@ export interface BrandTokens {
   heroOverlayEnd: string;
   mobileNavLabel?: string;
   useBsLogo?: boolean;
+  logoImage?: string;
 }
 
 export interface ContactInfo {
@@ -132,6 +133,7 @@ export interface FormContent {
   messagePlaceholder: string;
   options: FormOption[];
   trustBadges: string[];
+  web3formsKey?: string;
 }
 
 export interface FooterContent {
@@ -149,10 +151,44 @@ export interface FooterContent {
   termsLabel: string;
 }
 
+export interface WhatsappContact {
+  phoneNumber: string;
+  prefillMessage?: string;
+  buttonLabel?: string;
+  stickyLabel?: string;
+}
+
+export interface ReviewsLink {
+  url: string;
+  label?: string;
+}
+
+export interface MapEmbed {
+  embedUrl: string;
+  title?: string;
+}
+
+export interface SocialLinks {
+  facebook?: string;
+  instagram?: string;
+  tiktok?: string;
+  linkedin?: string;
+  youtube?: string;
+  checkatrade?: string;
+}
+
+export interface SiteEnhancements {
+  whatsapp?: WhatsappContact;
+  reviews?: ReviewsLink;
+  map?: MapEmbed;
+  socials?: SocialLinks;
+}
+
 export interface BusinessPreset {
   id: string;
   brand: BrandTokens;
   contact: ContactInfo;
+  enhancements?: SiteEnhancements;
   nav: {
     links: NavLink[];
     desktopCtaLabel: string;

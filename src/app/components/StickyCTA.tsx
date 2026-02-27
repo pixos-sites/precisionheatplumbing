@@ -6,6 +6,13 @@ interface StickyCTAProps {
 }
 
 export function StickyCTA({ preset }: StickyCTAProps) {
+  const whatsapp = preset.enhancements?.whatsapp;
+  const whatsappHref = whatsapp
+    ? `https://wa.me/${whatsapp.phoneNumber.replace(/\D/g, "")}${
+        whatsapp.prefillMessage ? `?text=${encodeURIComponent(whatsapp.prefillMessage)}` : ""
+      }`
+    : null;
+
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 lg:hidden bg-white border-t border-border shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
       <div className="flex items-stretch">
@@ -18,7 +25,9 @@ export function StickyCTA({ preset }: StickyCTAProps) {
           {preset.nav.mobileCallLabel}
         </a>
         <a
-          href="#contact"
+          href={whatsappHref ?? "#contact"}
+          target={whatsappHref ? "_blank" : undefined}
+          rel={whatsappHref ? "noopener noreferrer" : undefined}
           className="flex-1 flex items-center justify-center gap-2 py-3.5 text-white transition-opacity active:opacity-90"
           style={{
             fontSize: "0.875rem",
@@ -28,7 +37,7 @@ export function StickyCTA({ preset }: StickyCTAProps) {
           }}
         >
           <MessageSquare className="w-4 h-4" />
-          {preset.nav.mobileCtaLabel}
+          {whatsapp?.stickyLabel ?? preset.nav.mobileCtaLabel}
         </a>
       </div>
     </div>

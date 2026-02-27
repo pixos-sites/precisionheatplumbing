@@ -9,7 +9,7 @@ export function Process({ preset }: ProcessProps) {
   return (
     <section className="py-20 lg:py-28 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-12 lg:mb-16">
+        <div className="text-center max-w-2xl mx-auto mb-10 lg:mb-16">
           <span
             className="uppercase tracking-wider mb-3 block"
             style={{ fontSize: "0.8125rem", fontWeight: 600, color: "var(--brand-accent-ink)" }}
@@ -17,17 +17,18 @@ export function Process({ preset }: ProcessProps) {
             {preset.process.badge}
           </span>
           <h2
-            className="text-[#1A1A1A] mb-4"
+            className="text-[#1A1A1A] mb-3 lg:mb-4"
             style={{
               fontFamily: "var(--brand-heading-font)",
-              fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)",
-              fontWeight: 400,
+              fontSize: "clamp(1.9rem, 7vw, 2.5rem)",
+              fontWeight: "var(--brand-heading-weight, 700)",
               lineHeight: 1.2,
+              textWrap: "balance",
             }}
           >
             {preset.process.title}
           </h2>
-          <p className="text-[#6B7280]" style={{ fontSize: "1.0625rem", lineHeight: 1.7 }}>
+          <p className="text-[#6B7280]" style={{ fontSize: "clamp(1rem, 3.8vw, 1.0625rem)", lineHeight: 1.65, textWrap: "balance" }}>
             {preset.process.description}
           </p>
         </div>

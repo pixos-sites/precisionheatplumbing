@@ -15,7 +15,13 @@ export function Navbar({ preset }: NavbarProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           <a href="#" className="flex items-center gap-2 shrink-0">
-            {preset.brand.useBsLogo ? (
+            {preset.brand.logoImage ? (
+              <img
+                src={preset.brand.logoImage}
+                alt={preset.brand.companyName}
+                className="h-10 lg:h-12 w-auto object-contain"
+              />
+            ) : preset.brand.useBsLogo ? (
               <BSLogo className="h-10 lg:h-12 w-auto" />
             ) : (
               <div className="flex items-center gap-2.5">

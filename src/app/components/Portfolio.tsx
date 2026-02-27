@@ -29,7 +29,7 @@ export function Portfolio({ preset }: PortfolioProps) {
             style={{
               fontFamily: "var(--brand-heading-font)",
               fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)",
-              fontWeight: 400,
+              fontWeight: "var(--brand-heading-weight, 700)",
               lineHeight: 1.2,
             }}
           >

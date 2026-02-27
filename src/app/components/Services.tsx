@@ -22,7 +22,7 @@ export function Services({ preset }: ServicesProps) {
             style={{
               fontFamily: "var(--brand-heading-font)",
               fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)",
-              fontWeight: 400,
+              fontWeight: "var(--brand-heading-weight, 700)",
               lineHeight: 1.2,
             }}
           >
@@ -39,13 +39,15 @@ export function Services({ preset }: ServicesProps) {
               key={service.title}
               className="group bg-white rounded-xl border border-border overflow-hidden hover:shadow-lg hover:shadow-black/5 transition-all duration-300"
             >
-              <div className="aspect-[16/10] overflow-hidden">
-                <ImageWithFallback
-                  src={service.image}
-                  alt={service.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
+              {service.image && (
+                <div className="aspect-[16/10] overflow-hidden">
+                  <ImageWithFallback
+                    src={service.image}
+                    alt={service.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+              )}
               <div className="p-6">
                 <h3
                   className="text-[#1A1A1A] mb-2"

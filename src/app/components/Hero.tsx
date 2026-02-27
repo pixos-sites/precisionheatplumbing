@@ -37,7 +37,7 @@ export function Hero({ preset }: HeroProps) {
             style={{
               fontFamily: "var(--brand-heading-font)",
               fontSize: "clamp(2rem, 5vw, 3.5rem)",
-              fontWeight: 400,
+              fontWeight: "var(--brand-heading-weight, 700)",
               lineHeight: 1.15,
             }}
           >

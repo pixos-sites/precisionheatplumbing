@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CheckCircle2, Clock, Mail, MapPin, Phone, Send } from "lucide-react";
+import { CheckCircle2, Clock, ExternalLink, Mail, MapPin, MessageSquare, Phone, Send, Star } from "lucide-react";
 import type { BusinessPreset } from "@/config/template.types";
 
 interface ContactFormProps {
@@ -15,10 +15,37 @@ export function ContactForm({ preset }: ContactFormProps) {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const whatsapp = preset.enhancements?.whatsapp;
+  const whatsappHref = whatsapp
+    ? `https://wa.me/${whatsapp.phoneNumber.replace(/\D/g, "")}${
+        whatsapp.prefillMessage ? `?text=${encodeURIComponent(whatsapp.prefillMessage)}` : ""
+      }`
+    : null;
+  const reviews = preset.enhancements?.reviews;
+  const mapEmbed = preset.enhancements?.map;
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    setSubmitted(true);
+    const key = preset.contactForm.web3formsKey;
+    if (!key) { setSubmitted(true); return; }
+    setSubmitting(true);
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: key,
+          subject: `New enquiry from ${formData.name} — ${preset.brand.companyName}`,
+          from_name: preset.brand.companyName,
+          ...formData,
+        }),
+      });
+      const data = await res.json();
+      if (data.success) setSubmitted(true);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleChange = (
@@ -43,7 +70,7 @@ export function ContactForm({ preset }: ContactFormProps) {
               style={{
                 fontFamily: "var(--brand-heading-font)",
                 fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)",
-                fontWeight: 400,
+                fontWeight: "var(--brand-heading-weight, 700)",
                 lineHeight: 1.2,
               }}
             >
@@ -53,8 +80,8 @@ export function ContactForm({ preset }: ContactFormProps) {
               {preset.contactForm.description}
             </p>
 
-            <div className="space-y-5">
-              <a href={preset.contact.phoneHref} className="flex items-start gap-4 group">
+            <div className="space-y-4 sm:space-y-5">
+              <a href={preset.contact.phoneHref} className="flex items-start gap-3 sm:gap-4 group">
                 <div
                   className="w-11 h-11 rounded-lg flex items-center justify-center shrink-0"
                   style={{ backgroundColor: "var(--brand-accent-soft)" }}
@@ -68,13 +95,13 @@ export function ContactForm({ preset }: ContactFormProps) {
                   >
                     {preset.contact.phoneDisplay}
                   </span>
-                  <span className="block text-[#6B7280]" style={{ fontSize: "0.8125rem" }}>
+                  <span className="hidden sm:block text-[#6B7280]" style={{ fontSize: "0.8125rem" }}>
                     {preset.contact.openingHours}
                   </span>
                 </div>
               </a>
 
-              <a href={preset.contact.emailHref} className="flex items-start gap-4 group">
+              <a href={preset.contact.emailHref} className="flex items-start gap-3 sm:gap-4 group">
                 <div
                   className="w-11 h-11 rounded-lg flex items-center justify-center shrink-0"
                   style={{ backgroundColor: "var(--brand-accent-soft)" }}
@@ -88,13 +115,41 @@ export function ContactForm({ preset }: ContactFormProps) {
                   >
                     {preset.contact.email}
                   </span>
-                  <span className="block text-[#6B7280]" style={{ fontSize: "0.8125rem" }}>
+                  <span className="hidden sm:block text-[#6B7280]" style={{ fontSize: "0.8125rem" }}>
                     We aim to reply within 24 hours
                   </span>
                 </div>
               </a>
 
-              <div className="flex items-start gap-4">
+              {whatsappHref ? (
+                <a
+                  href={whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-3 sm:gap-4 group"
+                >
+                  <div
+                    className="w-11 h-11 rounded-lg flex items-center justify-center shrink-0"
+                    style={{ backgroundColor: "var(--brand-accent-soft)" }}
+                  >
+                    <MessageSquare className="w-5 h-5" style={{ color: "var(--brand-accent-ink)" }} />
+                  </div>
+                  <div>
+                    <span
+                      className="block text-[#1A1A1A] transition-colors"
+                      style={{ fontSize: "1rem", fontWeight: 600 }}
+                    >
+                      {whatsapp.buttonLabel ?? "Message us on WhatsApp"}
+                    </span>
+                    <span className="hidden sm:inline-flex items-center gap-1 text-[#6B7280]" style={{ fontSize: "0.8125rem" }}>
+                      Quick quote messages welcome
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </span>
+                  </div>
+                </a>
+              ) : null}
+
+              <div className="flex items-start gap-3 sm:gap-4">
                 <div
                   className="w-11 h-11 rounded-lg flex items-center justify-center shrink-0"
                   style={{ backgroundColor: "var(--brand-accent-soft)" }}
@@ -105,13 +160,13 @@ export function ContactForm({ preset }: ContactFormProps) {
                   <span className="block text-[#1A1A1A]" style={{ fontSize: "1rem", fontWeight: 600 }}>
                     {preset.contact.location}
                   </span>
-                  <span className="block text-[#6B7280]" style={{ fontSize: "0.8125rem" }}>
+                  <span className="hidden sm:block text-[#6B7280]" style={{ fontSize: "0.8125rem" }}>
                     {preset.contact.serviceAreaLine}
                   </span>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4">
+              <div className="hidden sm:flex items-start gap-4">
                 <div
                   className="w-11 h-11 rounded-lg flex items-center justify-center shrink-0"
                   style={{ backgroundColor: "var(--brand-accent-soft)" }}
@@ -127,6 +182,34 @@ export function ContactForm({ preset }: ContactFormProps) {
                   </span>
                 </div>
               </div>
+
+              {reviews ? (
+                <a
+                  href={reviews.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hidden sm:flex items-start gap-4 group"
+                >
+                  <div
+                    className="w-11 h-11 rounded-lg flex items-center justify-center shrink-0"
+                    style={{ backgroundColor: "var(--brand-accent-soft)" }}
+                  >
+                    <Star className="w-5 h-5" style={{ color: "var(--brand-accent-ink)" }} />
+                  </div>
+                  <div>
+                    <span
+                      className="block text-[#1A1A1A] transition-colors"
+                      style={{ fontSize: "1rem", fontWeight: 600 }}
+                    >
+                      {reviews.label ?? "Read our Google reviews"}
+                    </span>
+                    <span className="inline-flex items-center gap-1 text-[#6B7280]" style={{ fontSize: "0.8125rem" }}>
+                      Opens in a new tab
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </span>
+                  </div>
+                </a>
+              ) : null}
             </div>
 
             <div className="mt-8 pt-8 border-t border-border">
@@ -146,7 +229,7 @@ export function ContactForm({ preset }: ContactFormProps) {
             </div>
           </div>
 
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-3 space-y-6">
             <div className="bg-white rounded-xl border border-border p-6 lg:p-8 shadow-sm">
               {submitted ? (
                 <div className="text-center py-12">
@@ -286,7 +369,8 @@ export function ContactForm({ preset }: ContactFormProps) {
 
                     <button
                       type="submit"
-                      className="w-full flex items-center justify-center gap-2 text-white px-6 py-4 rounded-lg transition-opacity hover:opacity-90"
+                      disabled={submitting}
+                      className="w-full flex items-center justify-center gap-2 text-white px-6 py-4 rounded-lg transition-opacity hover:opacity-90 disabled:opacity-60"
                       style={{
                         fontSize: "1rem",
                         fontWeight: 600,
@@ -295,7 +379,7 @@ export function ContactForm({ preset }: ContactFormProps) {
                       }}
                     >
                       <Send className="w-4 h-4" />
-                      {preset.contactForm.submitLabel}
+                      {submitting ? "Sending…" : preset.contactForm.submitLabel}
                     </button>
 
                     <p className="text-center text-[#9CA3AF]" style={{ fontSize: "0.8125rem" }}>
@@ -305,6 +389,19 @@ export function ContactForm({ preset }: ContactFormProps) {
                 </>
               )}
             </div>
+
+            {mapEmbed ? (
+              <div className="bg-white rounded-xl border border-border p-2 shadow-sm">
+                <iframe
+                  src={mapEmbed.embedUrl}
+                  title={mapEmbed.title ?? `${preset.brand.companyName} location map`}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="w-full h-[280px] lg:h-[320px] rounded-lg border-0"
+                  allowFullScreen
+                />
+              </div>
+            ) : null}
           </div>
         </div>
       </div>
