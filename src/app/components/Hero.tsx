@@ -23,7 +23,7 @@ export function Hero({ preset }: HeroProps) {
         />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-12 lg:py-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-12 pb-28 lg:pt-16 lg:pb-28">
         <div className="max-w-2xl">
           <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 mb-5 lg:mb-6">
             <div className="w-2 h-2 rounded-full" style={{ backgroundColor: "var(--brand-accent)" }} />
