@@ -22,6 +22,29 @@ Each entry should include:
 
 ### February 2026 — Codex
 
+**Follow-up mobile form + sticky CTA stability fix (Precision Heat Plumbing issue)**
+
+- Root cause identified: form controls in `ContactForm` were set to `0.9375rem` (15px), which can trigger iOS zoom on focus and cause post-blur sideways drag/jitter behavior.
+- Updated form control font sizes in `src/app/components/ContactForm.tsx` from `0.9375rem` to `1rem` (16px) for:
+  - name input
+  - phone input
+  - email input
+  - service select
+  - message textarea
+- Hardened bottom sticky mobile CTA in `src/app/components/StickyCTA.tsx` with:
+  - `paddingBottom: max(env(safe-area-inset-bottom), 0px)` (safe area support)
+  - `transform: translateZ(0)` (stabilizes fixed rendering on mobile Safari during/after keyboard interactions)
+- Verified build: `npm run build:precisionheatplumbing` (pass)
+
+**Why**
+
+- User still observed horizontal movement after form interaction and sticky bottom CTA disappearing when scrolling back.
+- This patch targets known iOS focus/viewport behavior around sub-16px inputs and fixed bottom elements.
+
+---
+
+### February 2026 — Codex
+
 **Fixed mobile horizontal page drift after form blur/focus interactions**
 
 - Updated global base styles in `src/styles/theme.css` to prevent horizontal overscroll:

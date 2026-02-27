@@ -292,7 +292,7 @@ export function ContactForm({ preset }: ContactFormProps) {
                           onChange={handleChange}
                           placeholder={preset.contactForm.namePlaceholder}
                           className="w-full px-4 py-3 rounded-lg bg-[#F5F3EF] border border-transparent focus:bg-white focus:outline-none transition-all"
-                          style={{ fontSize: "0.9375rem" }}
+                          style={{ fontSize: "1rem" }}
                         />
                       </div>
                       <div>
@@ -308,7 +308,7 @@ export function ContactForm({ preset }: ContactFormProps) {
                           onChange={handleChange}
                           placeholder={preset.contactForm.phonePlaceholder}
                           className="w-full px-4 py-3 rounded-lg bg-[#F5F3EF] border border-transparent focus:bg-white focus:outline-none transition-all"
-                          style={{ fontSize: "0.9375rem" }}
+                          style={{ fontSize: "1rem" }}
                         />
                       </div>
                     </div>
@@ -325,7 +325,7 @@ export function ContactForm({ preset }: ContactFormProps) {
                         onChange={handleChange}
                         placeholder={preset.contactForm.emailPlaceholder}
                         className="w-full px-4 py-3 rounded-lg bg-[#F5F3EF] border border-transparent focus:bg-white focus:outline-none transition-all"
-                        style={{ fontSize: "0.9375rem" }}
+                        style={{ fontSize: "1rem" }}
                       />
                     </div>
 
@@ -340,7 +340,7 @@ export function ContactForm({ preset }: ContactFormProps) {
                         value={formData.service}
                         onChange={handleChange}
                         className="w-full px-4 py-3 rounded-lg bg-[#F5F3EF] border border-transparent focus:bg-white focus:outline-none transition-all appearance-none"
-                        style={{ fontSize: "0.9375rem" }}
+                        style={{ fontSize: "1rem" }}
                       >
                         <option value="">{preset.contactForm.servicePlaceholder}</option>
                         {preset.contactForm.options.map((option) => (
@@ -363,7 +363,7 @@ export function ContactForm({ preset }: ContactFormProps) {
                         onChange={handleChange}
                         placeholder={preset.contactForm.messagePlaceholder}
                         className="w-full px-4 py-3 rounded-lg bg-[#F5F3EF] border border-transparent focus:bg-white focus:outline-none transition-all resize-none"
-                        style={{ fontSize: "0.9375rem" }}
+                        style={{ fontSize: "1rem" }}
                       />
                     </div>
 

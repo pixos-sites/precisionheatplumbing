@@ -14,7 +14,13 @@ export function StickyCTA({ preset }: StickyCTAProps) {
     : null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 lg:hidden bg-white border-t border-border shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
+    <div
+      className="fixed bottom-0 left-0 right-0 z-50 lg:hidden bg-white border-t border-border shadow-[0_-4px_20px_rgba(0,0,0,0.08)]"
+      style={{
+        paddingBottom: "max(env(safe-area-inset-bottom), 0px)",
+        transform: "translateZ(0)",
+      }}
+    >
       <div className="flex items-stretch">
         <a
           href={preset.contact.phoneHref}
