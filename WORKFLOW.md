@@ -1,304 +1,218 @@
 # Master Workflow
 
-Version: 3.1
+Version: 5.0
 Last Updated: February 2026
 
-This is the single source of truth for every client project.
-Follow this workflow identically whether you are working with Claude or Codex.
+Single source of truth for every client project. Claude and Codex follow this identically.
 
 ---
 
-## What We Are Building
+## What We're Building
 
-A productised web design service targeting tradespeople (plumbers, electricians, builders, roofers, landscapers, etc.).
+Websites for tradespeople. Cold outreach at £700/site via WhatsApp Business.
+Identify prospect → build demo → send WhatsApp link → convert.
 
-The process:
-1. Identify a potential client
-2. Build their site (preset system or Figma Make import)
-3. Deploy a live demo to Vercel
-4. Cold email them with the link
-5. Convert to a paying client at £700
-
-No manual find-and-replace.
-Use one of two approved build paths:
-- Preset build (default) — build inside the template system using one preset file
-- Figma Make import (allowed) — import a downloaded site into `clients/<clientname>/` as a standalone client project
-
-Reason:
-- Presets are the long-term system
-- Figma Make is allowed at this stage to create more layout/style variation faster
-- Over time, strong patterns can be rebuilt into the template system and reused locally
+Everything lives in one folder on your Mac: `Master_Template`.
 
 ---
 
-## The Preset System (How It Works)
+## Starting a New Site
 
-Every client site is driven by a single preset file located at:
-`src/config/presets/<clientid>.ts`
+Tell the AI:
+```
+New site: [trade], [business name], [location], [their website URL if they have one]
+```
 
-This file contains everything:
-- Company name, phone, email, location
-- Brand colour
-- All section copy (hero, services, portfolio, testimonials, etc.)
-- Contact form options
-- Footer content
-
-The components never change. Only the preset file changes per client.
-
-To add a new client:
-1. Create `src/config/presets/<clientid>.ts`
-2. Register it in `src/config/presets/index.ts`
-3. Add `dev:<clientid>` and `build:<clientid>` scripts to `package.json`
+Optionally add which route you want (see below). If you don't specify, the AI picks the best one.
 
 ---
 
-## Stage 1 — Intake (Chat-Based Brief)
+## The Four Build Routes
 
-You do not fill in a form. You start a conversation.
+| Route | When to use |
+|-------|------------|
+| **A — Clone** | An existing client site looks similar to what you need. Fastest. |
+| **B — Catalogue** | Building fresh. Pick sections, colours, and layout from the catalogue. |
+| **C — Figma Make** | You want a completely new look not in the catalogue. |
+| **D — AI Custom** | Claude or Codex is making bespoke frontend changes. |
 
-Tell the AI one of the following to kick things off:
-- "New client — [trade] in [location]"
-- "I want to build a site for a [trade] in [location]"
-- "Cold outreach — [trade], [location], here's what I know: ..."
+### Route A — Clone an Existing Site
 
-The AI will then ask questions to fill in any gaps. Questions are asked in plain language, one topic at a time. You answer in plain language.
+Say: `"similar to lyonsplumbingheating"` or `"use the annieslandbuildersgroup layout"`
 
-### What the AI needs before building:
+AI does:
+1. Copies the named client site as the starting point
+2. Swaps in the new business name, trade, contact details, services, images
+3. Marks anything unknown as `// PLACEHOLDER`
+4. Saves brief to `clients/<clientid>/BRIEF.md`
+5. Confirms build passes
 
-**Must have (AI will ask if missing):**
-- Business name
-- Trade / business type
-- Town, city, or region
+### Route B — Catalogue Build
+
+Say: `"build fresh"` or `"use catalogue"`
+
+AI does:
+1. Checks `docs/VARIATION-LOG.md` — avoids repeating the same look as recent sites
+2. Picks hero variant, services layout, colour palette, font pairing from `docs/VARIATION-GUIDE.md`
+3. Picks images from `docs/IMAGES.md` based on trade
+4. Builds the site from scratch using the template system
+5. Saves brief to `clients/<clientid>/BRIEF.md`
+6. Confirms build passes
+
+Browse available sections and styles visually: `npm run dev:catalogue`
+
+### Route C — Figma Make Import
+
+Say: `"Figma import"` or provide the Figma Make files
+
+AI does:
+1. Imports the downloaded Figma Make files into `clients/<clientname>/`
+2. Cleans up placeholder content, marks unknowns as `// PLACEHOLDER`
+3. Saves brief to `clients/<clientname>/BRIEF.md`
+4. Confirms build passes
+
+### Route D — AI Custom
+
+Say: `"build something different"` or describe what you want
+
+AI does:
+1. Discusses the approach before touching any files
+2. Makes targeted changes to components or builds new ones
+3. All other rules still apply
+
+---
+
+## Stage 1 — Intake
+
+Before or during the build, AI collects:
+
+**Must have (AI asks if missing):**
+- Business name, trade, location
 - Phone number
-- Email address
-- Primary brand colour (or AI suggests one based on trade)
 - Main services (up to 6)
 
-**Nice to have (AI uses best judgement if missing):**
-- Hero headline direction
-- Portfolio project names and locations
-- Testimonials (real or placeholder)
-- Key trust points (years trading, accreditations, guarantee)
-- Any specific copy direction
+**AI fills in with best guess + `// PLACEHOLDER`:**
+- Email, hero copy, testimonials, portfolio items, trust points
 
-**If building for cold outreach (no client contact yet):**
-- Business name and trade is enough to start
-- AI generates plausible placeholder content
-- All placeholder content is clearly marked in the preset file with a comment: `// PLACEHOLDER`
+If the prospect has a website: AI extracts what it can from it automatically.
 
-Once intake is complete the AI saves the brief to:
-`clients/<clientname>/BRIEF.md`
+Saved to: `clients/<clientid>/BRIEF.md`
 
 ---
 
 ## Stage 2 — Build
 
-Before building, choose the build path:
-- `Preset build` (default)
-- `Figma Make import` (allowed alternative)
-
-### Decide Structure First (Before Building)
-
-Before writing or editing the client site, decide the site structure/layout type:
-- `One-page` site
-- `Multi-page` site
-
-Then choose the best existing layout reference as the starting point.
-
-Current reference points:
-- `BS Builders` style = strong one-page layout reference
-- `PolBuilt` style = strong multi-page layout reference
-
-Important:
-- These are starting references, not permanent limits
-- As more client sites are built, the library of layout references should grow
-- The AI should choose the best fit for the client first, then build from that structure
-- Do not start building content before the structure choice is clear
-
-### Path A — Preset Build (Default)
-
-Steps the AI takes:
-1. Creates `src/config/presets/<clientid>.ts` using the brief
-2. Registers it in `src/config/presets/index.ts`
-3. Adds `dev:<clientid>` and `build:<clientid>` scripts to `package.json`
-4. Confirms the build runs without errors
-
-Preset path rules:
-- Do not touch component files unless explicitly instructed
-- All placeholder content in the preset file must be marked `// PLACEHOLDER`
-
-### Path B — Figma Make Import (Allowed Alternative)
-
-Use this when speed/variation is more important than strict preset reuse for that client.
-
-Steps the AI takes:
-1. Take the downloaded Figma Make files from the user-provided folder
-2. Import them into `clients/<clientname>/` (standalone client project)
-3. Fix build/setup issues as needed so the project runs locally
-4. Replace or flag obvious placeholder content (mark placeholders clearly in editable content files)
-5. Confirm the build runs without errors
-
-Figma import path rules:
-- Treat the imported site as a standalone client project unless explicitly rebuilding it as a preset
-- Keep changes focused on cleanup, contact details, refinement, and deploy readiness unless bigger changes are requested
-- Do not mix the imported client with the root template app files unless explicitly planned
-
-Both paths:
-- Save the brief to `clients/<clientname>/BRIEF.md`
-- Confirm the correct folder/repo before edits (use `docs/DEPLOYMENT-MAP.md` and `docs/CHECKLIST.md`)
-
-The AI reports back in plain language:
-- Which build path was used (`preset` or `Figma Make import`)
-- What was built/imported
-- Any placeholders used and why
-- Anything that needs your input before refinement
+AI picks a route (or uses the one you specified) and builds the site.
+Reports back:
+- Which route was used and why
+- Placeholder count and which fields need filling
+- Which images were used
 
 ---
 
-## Stage 3 — Refinement (Up to 3 Rounds)
+## Stage 3 — Deploy
 
-You review the site locally using the correct dev command for that client/project.
+Works the same regardless of build route.
 
-Examples:
+**Preset site (Route B):**
 ```bash
-# Preset build
-npm run dev:<clientid>
-
-# Standalone imported site
-cd clients/<clientname> && npm run dev
+npm run build:<clientid>         # from Master_Template root
+vercel --name <clientid>         # create Vercel project, set VITE_PRESET=<clientid>
+vercel --prod
 ```
 
-Feed changes back in plain language. Examples:
+**Standalone site (Routes A, C, D):**
+```bash
+cd clients/<clientname>
+npm run build
+vercel --name <clientname>
+vercel --prod
+```
+
+After deploying (both types):
+1. In Vercel project settings → Domains → add `<clientid>.pixos.design`
+2. Confirm live URL works on desktop and mobile
+3. Update `clients/<clientid>/BRIEF.md` with the pixos.design URL
+4. Update `docs/VARIATION-LOG.md` with the combo used (Route B only)
+
+---
+
+## Stage 4 — WhatsApp Outreach (on request)
+
+WhatsApp Business only. No cold emails.
+
+AI generates:
+- Opening message (2-3 sentences, their business name, demo URL, one clear hook)
+- Follow-up (send after 2-3 days if no reply)
+
+---
+
+## Stage 5 — Refinement (up to 3 rounds)
+
+Tell the AI what to change in plain language. Examples:
 - "Change the headline to X"
-- "Swap service 3 for roofing"
-- "The colour feels too dark, try a lighter shade"
-- "Add a trust point about being family-run"
+- "Swap the hero colour to something darker"
+- "Add a trust point about 10 years trading"
 
-Refinement rules:
-- Preset path: update the preset file only
-- Figma Make import path: update only the imported client project files (no root template edits unless explicitly requested)
-
-Rounds:
-- Round 1: Your initial review after first build
-- Round 2: Follow-up changes
-- Round 3: Final polish before deploy
-
-After Round 3 the site should be ready to deploy. If it is not, flag what is still outstanding before proceeding.
-
----
-
-## Stage 4 — Deploy
-
-When the site is approved for demo:
-
-1. Run the production build for the correct path:
-```bash
-# Preset build
-npm run build:<clientid>
-
-# Standalone imported site
-cd clients/<clientname> && npm run build
-```
-
-2. Deploy to Vercel (import from GitHub or Vercel CLI)
-
-3. Confirm the live URL works on desktop and mobile
-
-4. Update `clients/<clientname>/BRIEF.md` with the Vercel URL
-
-The AI confirms:
-- Build passed with no errors
-- Contact details are correct on the live site
-- Mobile layout is intact
-
----
-
-## Stage 5 — Cold Outreach
-
-Once the demo is live, send the cold email.
-
-The email should:
-- Be short (4-6 sentences max)
-- Reference their business by name
-- Lead with the demo link
-- State the price clearly (£700)
-- Have one clear call to action (reply or call)
-
-If no reply within 3-5 days, follow up once.
+AI edits only the named client's files. Rebuilds and confirms build passes.
 
 ---
 
 ## Stage 6 — Client Converts
 
-If the client says yes:
-
-- [ ] Collect any real photos or updated content
-- [ ] Replace placeholders in the preset file
-- [ ] Final build and deploy to production
-- [ ] Transfer Vercel access or connect custom domain
-- [ ] Send handover note (how to contact you if anything needs changing)
-- [ ] Collect payment (£700)
-- [ ] Request a Google review or testimonial
-- [ ] Update `clients/<clientname>/BRIEF.md` with final status
+- [ ] Collect real photos → add to `public/images/<trade>/` (for next sites too)
+- [ ] Replace all `// PLACEHOLDER` content
+- [ ] Final build + deploy
+- [ ] Add their real domain in Vercel project settings
+- [ ] Collect £700
+- [ ] Ask for a Google review or testimonial
 
 ---
 
-## Rules for the AI (Claude and Codex)
+## Deleting a Client (No Response)
 
-1. Never edit component files unless explicitly instructed.
-2. Never guess on phone number, email, or business name — always ask.
-3. Always confirm build passes before reporting done.
-4. Report in plain language — no jargon.
-5. If something is a placeholder, mark it clearly (`// PLACEHOLDER` in preset files; clear placeholder marking/comment in imported client files where practical).
-6. Save the brief to `clients/<clientname>/BRIEF.md` at the end of intake.
-7. One source of truth per client:
-   - Preset path: one preset file (`src/config/presets/<clientid>.ts`)
-   - Figma Make import path: one standalone client folder (`clients/<clientname>/`)
-8. If picking up a project mid-way, read `clients/<clientname>/BRIEF.md` first.
-9. Decide site structure first (`one-page` vs `multi-page`) before building content.
-10. Start from the best layout reference available (currently `BS Builders` for one-page and `PolBuilt` for multi-page), but keep adding new layout references over time as better examples are created.
+If no response after 3-4 weeks:
+- Tell AI: `"delete [clientname], no response"`
+- AI deletes `clients/<clientname>/`
+- You delete the Vercel project manually (30 seconds in Vercel dashboard)
 
 ---
 
-## File Reference
+## Rules for the AI
 
-| File | Purpose |
-|------|---------|
-| `src/config/presets/<clientid>.ts` | All client content — the only file created per client |
-| `src/config/presets/index.ts` | Preset registry — updated when new preset is added |
-| `src/config/template.types.ts` | Type definitions — do not edit |
-| `package.json` | Dev and build scripts — updated when new preset is added |
-| `clients/<clientname>/` | Standalone client project (used for Figma Make imports) |
-| `clients/<clientname>/BRIEF.md` | Saved brief — source of truth for project context |
-
----
-
-## Existing Presets (Demo Sites)
-
-| ID | Business | Trade | Location |
-|----|----------|-------|----------|
-| `plumber` | FlowFix Plumbing | Plumbing | London |
-| `electrician` | Northline Electrical | Electrical | Manchester |
-| `bsbuilders` | BS Builders Ltd | Construction | Glasgow |
+1. Pick the best build route — explain the choice before building.
+2. Never edit another client's files. One client per session.
+3. Never use Unsplash URLs — always use local image bank (`docs/IMAGES.md`).
+4. Never guess phone, email, or business name — mark as `// PLACEHOLDER`.
+5. Always confirm build passes before reporting done.
+6. Save brief to `clients/<clientid>/BRIEF.md`.
+7. Update `docs/VARIATION-LOG.md` after every Route B deploy.
+8. Report in plain bullets. No jargon.
+9. **Codex:** run `git remote -v` first. Read `docs/CODEX-PROTOCOL.md`.
 
 ---
 
-## Build Commands Reference
+## Key Reference Files
 
-```bash
-# Preset build: run locally
-npm run dev:<clientid>
+| File | What it's for |
+|------|--------------|
+| `SESSION-START.md` | Quick startup — read this first |
+| `docs/IMAGES.md` | Which local images to use per trade |
+| `docs/VARIATION-GUIDE.md` | Available sections, colours, fonts for Route B |
+| `docs/VARIATION-LOG.md` | Last 5 Route B builds — check before building to avoid repeats |
+| `docs/CODEX-PROTOCOL.md` | Codex-specific safe rules |
+| `docs/DEPLOYMENT-MAP.md` | Live URLs per client |
+| `docs/CHECKLIST.md` | Pre-deploy checks |
 
-# Preset build: production build
-npm run build:<clientid>
+---
 
-# Standalone imported site: run locally
-cd clients/<clientname> && npm run dev
+## Current Clients
 
-# Standalone imported site: production build
-cd clients/<clientname> && npm run build
+| Client | Folder | Type |
+|--------|--------|------|
+| Precision Heat Plumbing | `src/config/presets/precisionheatplumbing.ts` | Preset (Route B) |
+| Annies Land Builders Group | `src/config/presets/annieslandbuildersgroup.ts` + `clients/annieslandbuildersgroup/` | Preset (Route B) |
+| SCL Builders Ltd | `src/config/presets/sclbuildersltd.ts` + `clients/sclbuilders/` | Preset (Route B) |
+| + 21 standalone clients | `clients/<name>/` | Standalone (Routes A/C/D) |
 
-# Existing presets
-npm run dev:plumber
-npm run dev:electrician
-```
+Full list: `clients/` folder. Priority queue: `clients/PRIORITY-QUEUE.md`.

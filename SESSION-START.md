@@ -1,45 +1,59 @@
 # SESSION-START.md
 
-Quick startup summary for Claude/Codex.
-Read this first to reduce context use. Use `WORKFLOW.md` as the full source of truth when doing client work.
+Quick startup for Claude and Codex. Read this only. Full process in `WORKFLOW.md`.
 
-## Current Process (Short Version)
+---
 
-- Default build path: `Preset build` (single preset file drives the site)
-- Allowed alternative: `Figma Make import` into `clients/<clientname>/` as a standalone client project
-- Decide structure before building content:
-  - `one-page` (BS Builders style reference)
-  - `multi-page` (PolBuilt style reference)
-- Save all client briefs to `clients/<clientname>/BRIEF.md`
-- Confirm builds pass before reporting a stage complete
-- If you change process/structure (not normal client edits), log it in `HANDOVER.md`
+## Starting a new site
 
-## Source Of Truth Rules
+```
+New site: [trade], [business name], [location], [their website URL if any]
+```
 
-- Preset path: edit only `src/config/presets/<clientid>.ts` unless explicitly instructed otherwise
-- Figma import path: edit only files inside `clients/<clientname>/` unless explicitly instructed otherwise
-- Do not mix root template files and imported client project files by accident
+Optionally add the route. If not specified, AI picks the best one.
 
-## Current Useful Docs
+## The four build routes
 
-- `WORKFLOW.md` = full process
-- `HANDOVER.md` = recent changes only (trimmed for startup speed)
-- `docs/archive/HANDOVER-ARCHIVE.md` = older handover history
-- `docs/DEPLOYMENT-MAP.md` = which local folder/repo/live demo maps to which client
-- `docs/CHECKLIST.md` = pre-edit / pre-deploy checks
+| Route | When |
+|-------|------|
+| **A — Clone** | Copy an existing client site, adapt for new business |
+| **B — Catalogue** | Build fresh — pick sections, colours, layout from catalogue |
+| **C — Figma Make** | Import Figma Make files for a completely new look |
+| **D — AI Custom** | Claude/Codex building or modifying frontend directly |
 
-## Current Template Notes (Important)
+## Rules (always)
 
-- Preset template supports optional `enhancements` fields for:
-  - WhatsApp click-to-chat
-  - Reviews link
-  - Google Maps embed
-- These are optional and do not break older presets
-- Example implementation exists in `src/config/presets/plumber.ts`
+- One client per session — never touch another client's files
+- Never use Unsplash URLs — use local image bank (`docs/IMAGES.md`)
+- Never guess phone/email/business name — mark as `// PLACEHOLDER`
+- Confirm build passes before reporting done
+- Save brief to `clients/<clientid>/BRIEF.md`
+- Route B only: update `docs/VARIATION-LOG.md` after deploy
 
-## Context Efficiency Rules (Use By Default)
+## On startup (existing client)
 
-- Prefer targeted reads (`rg`, specific files, line ranges) over opening full files
-- Read `WORKFLOW.md` fully only when starting client work or verifying process details
-- Use `HANDOVER.md` for recent changes; only open the archive if needed
-- Do not inspect unrelated client folders unless the task is about them
+Read `clients/<clientid>/BRIEF.md` first. Nothing else.
+
+## Demo URLs
+
+All demos use `pixos.design` — e.g. `mikeswift.pixos.design`
+After deploy → Vercel project settings → Domains → add the subdomain.
+
+## Outreach
+
+WhatsApp Business only. No emails.
+
+## Key docs
+
+| Doc | Use for |
+|-----|---------|
+| `WORKFLOW.md` | Full process — read when needed |
+| `docs/IMAGES.md` | Which images to use per trade |
+| `docs/VARIATION-GUIDE.md` | Sections, colours, fonts (Route B) |
+| `docs/VARIATION-LOG.md` | Last 5 Route B builds — avoid repeating same look |
+| `docs/CODEX-PROTOCOL.md` | Codex safe rules |
+| `clients/PRIORITY-QUEUE.md` | Which clients to work on first |
+
+## Codex only
+
+Run `git remote -v` first. Output must show `Master_Template`. Then read `docs/CODEX-PROTOCOL.md`.
