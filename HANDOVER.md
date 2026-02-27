@@ -22,6 +22,24 @@ Each entry should include:
 
 ### February 2026 — Codex
 
+**Sticky CTA now tracks mobile visual viewport (down-scroll gap fix attempt)**
+
+- Updated `src/app/components/StickyCTA.tsx` to use `window.visualViewport` and dynamically adjust CTA vertical offset.
+- Added React state/effect to compute offset:
+  - `offset = max(0, window.innerHeight - (visualViewport.height + visualViewport.offsetTop))`
+  - applied as `transform: translate3d(0, <offset>px, 0)` with `bottom: 0`
+- This is intended to keep CTA visually pinned to the browser edge in both toolbar states (scroll up/down) instead of static CSS safe-area assumptions.
+- Verified build: `npm run build:precisionheatplumbing` (pass)
+
+**Why**
+
+- User reported CTA is flush when scrolling up but still leaves a visible gap when scrolling down.
+- Static `bottom`/safe-area CSS did not fully match dynamic mobile browser chrome behavior.
+
+---
+
+### February 2026 — Codex
+
 **Sticky CTA flush-bottom adjustment for iOS scroll state**
 
 - Updated `src/app/components/StickyCTA.tsx` to remove Tailwind `bottom-0` class and set explicit inline bottom offset:
