@@ -22,6 +22,22 @@ Each entry should include:
 
 ### February 2026 — Codex
 
+**Sticky CTA flush-bottom adjustment for iOS scroll state**
+
+- Updated `src/app/components/StickyCTA.tsx` to remove Tailwind `bottom-0` class and set explicit inline bottom offset:
+  - `bottom: calc(env(safe-area-inset-bottom, 0px) * -1)`
+- Kept fixed-bar rendering stabilization (`transform: translateZ(0)`).
+- Verified build: `npm run build:precisionheatplumbing` (pass)
+
+**Why**
+
+- User still observed a visible content gap between sticky CTA and browser bar while scrolling down on mobile.
+- Negative safe-area offset pulls the fixed CTA flush against the browser edge in that state.
+
+---
+
+### February 2026 — Codex
+
 **Mobile contact icon/text alignment + sticky CTA bottom-gap fix**
 
 - Updated contact info row alignment in `src/app/components/ContactForm.tsx`:
