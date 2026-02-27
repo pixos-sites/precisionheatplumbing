@@ -22,6 +22,25 @@ Each entry should include:
 
 ### February 2026 — Codex
 
+**Viewport-fit fix + sticky CTA positioning reset**
+
+- Updated root viewport meta in `index.html`:
+  - `width=device-width, initial-scale=1.0, viewport-fit=cover`
+- Reverted `StickyCTA` from JS `visualViewport` offset tracking back to simple fixed bottom positioning:
+  - removed dynamic React state/effect logic
+  - restored `className` with `bottom-0`
+  - kept lightweight `transform: translateZ(0)` for rendering stability
+- Verified build: `npm run build:precisionheatplumbing` (pass)
+
+**Why**
+
+- User confirmed deployment was on the correct commit but still saw bottom gap behavior.
+- Missing `viewport-fit=cover` can prevent predictable edge behavior in iOS safe-area/bottom browser UI conditions.
+
+---
+
+### February 2026 — Codex
+
 **Sticky CTA now tracks mobile visual viewport (down-scroll gap fix attempt)**
 
 - Updated `src/app/components/StickyCTA.tsx` to use `window.visualViewport` and dynamically adjust CTA vertical offset.

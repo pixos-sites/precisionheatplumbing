@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { MessageSquare, Phone } from "lucide-react";
 import type { BusinessPreset } from "@/config/template.types";
 
@@ -7,7 +6,6 @@ interface StickyCTAProps {
 }
 
 export function StickyCTA({ preset }: StickyCTAProps) {
-  const [viewportOffset, setViewportOffset] = useState(0);
   const whatsapp = preset.enhancements?.whatsapp;
   const whatsappHref = whatsapp
     ? `https://wa.me/${whatsapp.phoneNumber.replace(/\D/g, "")}${
@@ -15,37 +13,11 @@ export function StickyCTA({ preset }: StickyCTAProps) {
       }`
     : null;
 
-  useEffect(() => {
-    const visualViewport = window.visualViewport;
-    if (!visualViewport) return;
-
-    const updateOffset = () => {
-      const offset = Math.max(
-        0,
-        window.innerHeight - (visualViewport.height + visualViewport.offsetTop)
-      );
-      setViewportOffset(offset);
-    };
-
-    updateOffset();
-    visualViewport.addEventListener("resize", updateOffset);
-    visualViewport.addEventListener("scroll", updateOffset);
-    window.addEventListener("orientationchange", updateOffset);
-
-    return () => {
-      visualViewport.removeEventListener("resize", updateOffset);
-      visualViewport.removeEventListener("scroll", updateOffset);
-      window.removeEventListener("orientationchange", updateOffset);
-    };
-  }, []);
-
   return (
     <div
-      className="fixed left-0 right-0 z-50 lg:hidden bg-white border-t border-border shadow-[0_-4px_20px_rgba(0,0,0,0.08)]"
+      className="fixed bottom-0 left-0 right-0 z-50 lg:hidden bg-white border-t border-border shadow-[0_-4px_20px_rgba(0,0,0,0.08)]"
       style={{
-        bottom: 0,
-        transform: `translate3d(0, ${viewportOffset}px, 0)`,
-        willChange: "transform",
+        transform: "translateZ(0)",
       }}
     >
       <div className="flex items-stretch">
