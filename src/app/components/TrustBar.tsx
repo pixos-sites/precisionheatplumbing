@@ -21,11 +21,14 @@ export function TrustBar({ preset }: TrustBarProps) {
                   >
                     <Icon className="w-5 h-5" style={{ color: "var(--brand-accent-ink)" }} />
                   </div>
-                  <div>
-                    <span className="block text-[#1A1A1A]" style={{ fontSize: "1.25rem", fontWeight: 700, lineHeight: 1.2 }}>
+                  <div className="min-w-0">
+                    <span
+                      className="block text-[#1A1A1A] leading-tight break-words"
+                      style={{ fontSize: "clamp(1rem, 4.8vw, 1.25rem)", fontWeight: 700 }}
+                    >
                       {item.value}
                     </span>
-                    <span className="block text-[#6B7280]" style={{ fontSize: "0.8125rem", lineHeight: 1.3 }}>
+                    <span className="block text-[#6B7280] break-words" style={{ fontSize: "0.8125rem", lineHeight: 1.3 }}>
                       {item.label}
                     </span>
                   </div>

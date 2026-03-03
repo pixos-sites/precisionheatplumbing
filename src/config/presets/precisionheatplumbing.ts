@@ -17,6 +17,7 @@ export const precisionheatplumbingPreset: BusinessPreset = {
     heroOverlayEnd: "rgba(45,35,110,0.08)",
     useBsLogo: false,
     logoImage: "/images/plumbing/precision-logo.png",
+    mobileNavLabel: "",
   },
   contact: {
     phoneDisplay: "07805 565421",
@@ -32,7 +33,7 @@ export const precisionheatplumbingPreset: BusinessPreset = {
       phoneNumber: "447805565421",
       prefillMessage: "Hi Lee, I'd like a quote for plumbing/heating work.",
       buttonLabel: "Message Lee on WhatsApp",
-      stickyLabel: "WhatsApp Quote",
+      stickyLabel: "WhatsApp Chat",
     },
     reviews: {
       url: "https://www.google.com/search?q=Precision+Heat+Plumbing+reviews",

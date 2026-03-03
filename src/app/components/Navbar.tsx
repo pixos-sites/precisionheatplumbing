@@ -9,6 +9,7 @@ interface NavbarProps {
 
 export function Navbar({ preset }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const mobileBrandLabel = preset.brand.mobileNavLabel ?? preset.brand.companyName;
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-border">
@@ -47,12 +48,14 @@ export function Navbar({ preset }: NavbarProps) {
                 </span>
               </div>
             )}
-            <span
-              className={`${preset.brand.useBsLogo ? "lg:hidden" : "sm:hidden"} text-[#1A1A1A] font-bold tracking-tight`}
-              style={{ fontSize: "1rem" }}
-            >
-              {preset.brand.mobileNavLabel ?? preset.brand.companyName}
-            </span>
+            {mobileBrandLabel ? (
+              <span
+                className={`${preset.brand.useBsLogo ? "lg:hidden" : "sm:hidden"} text-[#1A1A1A] font-bold tracking-tight`}
+                style={{ fontSize: "1rem" }}
+              >
+                {mobileBrandLabel}
+              </span>
+            ) : null}
           </a>
 
           <div className="hidden lg:flex items-center gap-8">
